@@ -1,0 +1,11 @@
+[package]
+name = "tea-timer"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["log"]
+log = ["dep:log"]
+
+[dependencies]
+log = { version = "0.4", optional = true }
