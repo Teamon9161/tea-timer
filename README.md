@@ -22,10 +22,6 @@ tea-timer = "0.1.0"
 
 ### Macro Usage
 ```rust
-// add [macro_use] to the top of the file
-#[macro_use]
-extern crate tea_timer;
-
 let result = tea_timer::took! {
     // ...any code
 };

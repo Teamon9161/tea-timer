@@ -22,9 +22,6 @@
 //!
 //! ### Macro Usage
 //! ```rust
-//! // add [macro_use] to the top of the file
-//! #[macro_use]
-//! extern crate tea_timer;
 //!
 //! let result = tea_timer::took! {
 //!     // ...any code
@@ -261,16 +258,16 @@ impl Timer {
 }
 
 #[inline]
-pub fn took<F: FnOnce() -> R, R>(f: F, task_name: Option<&str>) -> R {
-    let timer = Timer::new(task_name.unwrap_or(""));
+pub fn took<F: FnOnce() -> R, R>(f: F, task_name: &str) -> R {
+    let timer = Timer::new(task_name);
     let result = f();
     timer.stop();
     result
 }
 
 #[inline]
-pub fn ltook<F: FnOnce() -> R, R>(f: F, task_name: Option<&str>) -> R {
-    let timer = Timer::new(task_name.unwrap_or(""));
+pub fn ltook<F: FnOnce() -> R, R>(f: F, task_name: &str) -> R {
+    let timer = Timer::new(task_name);
     let result = f();
     timer.log();
     result
@@ -280,7 +277,7 @@ pub fn ltook<F: FnOnce() -> R, R>(f: F, task_name: Option<&str>) -> R {
 macro_rules! took {
     ($($tt:tt)*) => {
         {
-            let timer = Timer::new("");
+            let timer = $crate::Timer::new("");
             let res = {$($tt)*};
             timer.stop();
             res
@@ -292,7 +289,7 @@ macro_rules! took {
 macro_rules! ltook {
     ($($tt:tt)*) => {
         {
-            let timer = Timer::new("");
+            let timer = $crate::Timer::new("");
             let res = {$($tt)*};
             timer.log();
             res
@@ -346,7 +343,7 @@ mod tests {
                 sleep(Duration::from_millis(10));
                 42
             },
-            Some("Test Task"),
+            "Test Task",
         );
         assert_eq!(result, 42);
     }
