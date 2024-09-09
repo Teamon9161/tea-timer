@@ -2,6 +2,7 @@
 name = "tea-timer"
 version = "0.1.1"
 edition = "2021"
+repository = "https://github.com/Teamon9161/tea-timer"
 description = "A simple and efficient Rust library for measuring and reporting the duration of tasks"
 license = "MIT"
 
